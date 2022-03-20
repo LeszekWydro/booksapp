@@ -14,7 +14,7 @@
     all: {
       bookName: '.book_name',
       price: '.product__base-price',
-      bookImg: '.book__image'
+      bookImg: '.book__image',
     },
 
   };
@@ -37,5 +37,27 @@
     }
   };
 
-  new render();
+  const favoriteBooks = [];
+
+  const initActions = function(){
+
+    const allImages = document.querySelectorAll(select.all.bookImg);
+
+    for (let image of allImages){
+      image.addEventListener('click', function(event){
+        event.preventDefault();
+
+        image.classList.add('favorite');
+
+        const idBook = image.getAttribute('data-id');
+
+        favoriteBooks.push(idBook);
+      });
+
+    }
+
+  };
+
+  render();
+  initActions();
 }
