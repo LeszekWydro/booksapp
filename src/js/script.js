@@ -47,11 +47,26 @@
       image.addEventListener('click', function(event){
         event.preventDefault();
 
-        image.classList.add('favorite');
-
         const idBook = image.getAttribute('data-id');
 
-        favoriteBooks.push(idBook);
+
+        if (favoriteBooks.includes(idBook)){
+
+          image.classList.remove('favorite');
+
+          const favoriteBooksIndex = favoriteBooks.indexOf(idBook);
+
+          favoriteBooks.splice(favoriteBooksIndex,1);
+
+
+        }
+
+        else {
+  
+          image.classList.add('favorite');
+
+          favoriteBooks.push(idBook);
+        }
       });
 
     }
