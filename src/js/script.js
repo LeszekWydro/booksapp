@@ -23,6 +23,7 @@
     book: Handlebars.compile(document.querySelector(select.templateOf.books).innerHTML), 
   };
 
+
   const render = function(){
 
     for (let book of dataSource.books){
@@ -41,36 +42,34 @@
 
   const initActions = function(){
 
-    const allImages = document.querySelectorAll(select.all.bookImg);
+    const container = document.querySelector(select.list.bookList);
+    
+    container.addEventListener('dblclick', function(event){
+      event.preventDefault();
 
-    for (let image of allImages){
-      image.addEventListener('click', function(event){
-        event.preventDefault();
+      const elementClicked = event.target.offsetParent;
 
-        const idBook = image.getAttribute('data-id');
+      console.log(elementClicked);
 
+      if(elementClicked.classList.contains('.book__image')){
 
-        if (favoriteBooks.includes(idBook)){
-
-          image.classList.remove('favorite');
-
+        const idBook = elementClicked.getAttribute('data-id');
+        
+        if(favoriteBooks.includes(idBook)){
+          
+          elementClicked.classList.remove('favorite');
+          
           const favoriteBooksIndex = favoriteBooks.indexOf(idBook);
-
           favoriteBooks.splice(favoriteBooksIndex,1);
 
+        }else {
 
-        }
-
-        else {
-  
-          image.classList.add('favorite');
-
+          elementClicked.classList.add('favorite');
           favoriteBooks.push(idBook);
+
         }
-      });
-
-    }
-
+      }
+    });
   };
 
   render();
