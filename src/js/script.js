@@ -153,4 +153,5 @@
     }
   }
   const app = new BookList();
+  console.log('app', app);
 }
